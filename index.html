@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Yasmin!</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Login Form */
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-container h1 {
+            color: #e91e63;
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #f8bbd0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .login-container button {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .login-container button:hover {
+            background-color: #c2185b;
+        }
+
+        /* Birthday Page */
+        .birthday-container {
+            display: none;
+            position: relative;
+        }
+
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid #f7f5f6;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .message {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .message h2 {
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+
+        .message p {
+            margin: 10px 0;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .surprise-btn {
+            background-color: #e91e63;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .surprise-btn:hover {
+            background-color: #c2185b;
+            transform: scale(1.05);
+        }
+
+        /* Surprise Page */
+        .surprise-container {
+            display: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .surprise-container h2 {
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+
+        .surprise-container p {
+            margin: 15px 0;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        /* Heart Rain */
+        .heart {
+            position: absolute;
+            top: -50px;
+            color: #ff69b4;
+            font-size: 20px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* Background Animation */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #e995e2, #e236c5, #f7a8e0, #f871e2);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    
+    <div class="container">
+        <!-- Login Form -->
+        <div class="login-container" id="loginForm">
+            <h1>Selamat Ulang Tahun Yasmin!</h1>
+            <p>Masukkan password untuk melihat kejutan:</p>
+            <input type="password" id="passwordInput" placeholder="Masukkan password...">
+            <button onclick="checkPassword()">Masuk</button>
+        </div>
+
+        <!-- Birthday Page -->
+        <div class="birthday-container" id="birthdayPage">
+            <div class="photo-frame">
+                <!-- Ganti URL gambar dengan foto Yasmin -->
+                <img src="potber.jpg" alt="Foto Yasmin">
+            </div>
+            
+            <div class="message">
+                <h2>For jsmnessch imut nan gemesh cantik</h2>
+                <p>~jsmnessch~</p>
+                <p>Happy Birthday yaaaa🎂🍵🥳</p>
+            </div>
+            
+            <button class="surprise-btn" onclick="showSurprise()">Buka Kejutan!</button>
+            
+            <!-- Audio Player -->
+            <audio id="birthdayMusic" loop>
+                <!-- Ganti URL dengan lagu ulang tahun yang diinginkan -->
+                <source src="Kasih - Aera.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Surprise Page -->
+        <div class="surprise-container" id="surprisePage">
+            <h2>For jsmnessch imut nan gemesh cantik</h2>
+            <p>~jsmnessch~</p>
+            <p>Happy Birthday yaaaa🎂🍵🥳</p>
+            <p>cieee nambahh satuu umurnyaaa. semoga cita cita yasminn 
+                untuk lulus ptn nanti tercapaii yaa dengan usaha dan doa 
+                yasmiinnn semogaa Yasmin diberii kesehatan yang lebihhh biar
+                 semangaat belajar yasmiinnn untuk masuk ptn nantiii and ingett
+                  yaa yasmin ituu terbaikk ga ada yang bisa
+                 rajin seperti Yasmin ga ada yang bisa sekonsisten yasminn kegiatannyaaa,dewa 
+                 salutt bangett sama yasminnn aslii rill no fek fekkk takk boongggg daweee…</p>
+
+            <p>yasminn jangan sering begadangg gadangg yaaa,yasminn haruss bisa jaga pola hidup
+                 yasminn biar sehatt,,,dewa tau kok yasmin lagi fokus banget buat masuk PTN dewa percaya 
+                 banget yasmin bakal bisa lulus karna yasmin itu anaknya pintar,rajinn dann ga gampang 
+                 menyerahhh,jadi jangan pernah ragu sama kemampuan yasmin sendiri yaaa karena hasil kerja keras
+                  yasmin bakal kebayarr manisssssssssssweatt….</p>
+
+            <p> dewaa selaluuu support yasmiiinnn mauuu segimanapuuunnn dimata dewa yasminn terbaiikkk yasminn 
+                kuat menghadapii masalah sebesar sekecill apapun yasmin bisa lewatiiinn jujur dewa salut bangett
+                 punya temen cewee cantikkk lucuu imutt gemeshhh namanyaa Yasmin awalia syahputri  punya tujuan 
+                 positiff dann perempuan yang paling dewa kagumiiiin</p>
+
+            <p> Happy Birthdayyyy yaaaa anakk cantikkkk semogaaa sehat selaluuu rezekii diamalkannnn 
+                 yaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa🎂🥳🥳🥳🥳🥳</p>
+            <p>Dibaca ya dek KETIKAN GUWE awas kalo ga dibaca😡😡 </p>
+            <p> 💝</p>
+            
+            <button class="surprise-btn" onclick="goBack()">Kembali ke dawe</button>
+        </div>
+    </div>
+
+    <script>
+        // Password yang benar
+        const correctPassword = "0611";
+        const correctUsername = "yasmin";
+        
+        // Fungsi untuk memeriksa password
+        function checkPassword() {
+            const input = document.getElementById("passwordInput").value.toLowerCase();
+            
+            if (input === correctUsername || input === correctPassword) {
+                // Tampilkan halaman ulang tahun
+                document.getElementById("loginForm").style.display = "none";
+                document.getElementById("birthdayPage").style.display = "block";
+                
+                // Mulai musik
+                document.getElementById("birthdayMusic").play();
+                
+                // Mulai hujan hati
+                startHeartRain();
+            } else {
+                alert("Password salah! Coba lagi.");
+            }
+        }
+        
+        // Fungsi untuk menampilkan halaman kejutan
+        function showSurprise() {
+            document.getElementById("birthdayPage").style.display = "none";
+            document.getElementById("surprisePage").style.display = "block";
+        }
+        
+        // Fungsi untuk kembali ke halaman sebelumnya
+        function goBack() {
+            document.getElementById("surprisePage").style.display = "none";
+            document.getElementById("birthdayPage").style.display = "block";
+        }
+        
+        // Fungsi untuk membuat hujan hati
+        function startHeartRain() {
+            setInterval(() => {
+                createHeart();
+            }, 300);
+        }
+        
+        function createHeart() {
+            const heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            
+            // Posisi acak di atas layar
+            heart.style.left = Math.random() * 100 + "vw";
+            
+            // Ukuran acak
+            const size = Math.random() * 20 + 10;
+            heart.style.fontSize = size + "px";
+            
+            // Kecepatan jatuh acak
+            const duration = Math.random() * 3 + 2;
+            heart.style.animationDuration = duration + "s";
+            
+            document.body.appendChild(heart);
+            
+            // Hapus elemen setelah animasi selesai
+            setTimeout(() => {
+                heart.remove();
+            }, duration * 1000);
+        }
+        
+        // Event listener untuk input password (bisa tekan Enter)
+        document.getElementById("passwordInput").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                checkPassword();
+            }
+        });
+    </script>
+</body>
+</html>
